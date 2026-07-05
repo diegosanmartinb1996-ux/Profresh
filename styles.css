@@ -132,6 +132,7 @@ ul { list-style: none; padding: 0; }
 .nav-links a { font-size: .9rem; font-weight: 500; color: var(--ink-2); display: inline-flex; align-items: baseline; gap: .35rem; white-space: nowrap; transition: color .3s; }
 .nav-links a b { font-family: var(--mono); font-size: .62rem; color: var(--accent); font-weight: 700; }
 .nav-links a:hover { color: var(--ink); }
+.nav-actions { display: flex; align-items: center; gap: .9rem; }
 .nav-ig { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: var(--ink); border: 1.5px solid var(--line); transition: color .3s, border-color .3s, transform .3s var(--ease-out); }
 .nav-ig svg { flex: none; }
 .nav-ig svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
