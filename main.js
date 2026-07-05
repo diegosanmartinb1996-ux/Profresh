@@ -186,16 +186,17 @@
     // Desktop: arrastrar con el mouse para mover el carrusel (sin secuestrar
     // la rueda — el scroll vertical de la página queda 100% fluido).
     if (fineHover) {
-      var down = false, startX = 0, startScroll = 0, moved = false;
+      var down = false, startX = 0, startScroll = 0, moved = false, downAt = 0;
       vp.addEventListener("pointerdown", function(e){
-        down = true; moved = false;
+        down = true; moved = false; downAt = Date.now();
         startX = e.clientX; startScroll = vp.scrollLeft;
         vp.classList.add("is-grabbing");
       });
       window.addEventListener("pointermove", function(e){
         if (!down) return;
         var dx = e.clientX - startX;
-        if (Math.abs(dx) > 20) moved = true;
+        // Un clic rápido nunca cuenta como arrastre, aunque el mouse tiemble un poco.
+        if (Math.abs(dx) > 50 && (Date.now() - downAt) > 150) moved = true;
         vp.scrollLeft = startScroll - dx;
       });
       window.addEventListener("pointerup", function(){
