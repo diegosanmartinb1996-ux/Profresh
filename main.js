@@ -190,14 +190,20 @@
       vp.addEventListener("pointerdown", function(e){
         down = true; moved = false; downAt = Date.now();
         startX = e.clientX; startScroll = vp.scrollLeft;
-        vp.classList.add("is-grabbing");
+        // OJO: "is-grabbing" (que desactiva pointer-events en las tarjetas)
+        // solo se agrega mas abajo, una vez confirmado un arrastre real.
+        // Agregarlo aqui de inmediato bloqueaba el click nativo en CUALQUIER
+        // clic normal de mouse, aunque se soltara al instante sin moverse.
       });
       window.addEventListener("pointermove", function(e){
         if (!down) return;
         var dx = e.clientX - startX;
-        // Un clic rápido nunca cuenta como arrastre, aunque el mouse tiemble un poco.
-        if (Math.abs(dx) > 50 && (Date.now() - downAt) > 150) moved = true;
         vp.scrollLeft = startScroll - dx;
+        // Un clic rápido nunca cuenta como arrastre, aunque el mouse tiemble un poco.
+        if (!moved && Math.abs(dx) > 50 && (Date.now() - downAt) > 150) {
+          moved = true;
+          vp.classList.add("is-grabbing");
+        }
       });
       window.addEventListener("pointerup", function(){
         down = false; vp.classList.remove("is-grabbing");
