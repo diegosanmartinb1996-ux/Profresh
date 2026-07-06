@@ -173,16 +173,25 @@ ul { list-style: none; padding: 0; }
 .big-num.inline { position: static; font-size: clamp(2.4rem, 5vw, 3.5rem); opacity: .14; display: block; }
 
 /* 10. HERO ----------------------------------------------------- */
-.hero { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 7rem var(--gutter) 3rem; position: relative; }
-.hero-inner { max-width: 980px; }
+.hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 7rem var(--gutter) 3rem; position: relative; background: var(--bg); }
+.hero-grid { display: flex; flex-direction: column; align-items: flex-start; gap: 2.6rem; max-width: 1360px; margin: 0 auto; width: 100%; }
+.hero-inner { max-width: 620px; }
 .hero-kicker { font-family: var(--mono); font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 1.6rem; }
-.hero-title { font-size: clamp(3rem, 11vw, 8.5rem); font-weight: 800; letter-spacing: -.04em; line-height: .92; }
+.hero-title { font-size: clamp(2.7rem, 6vw, 4.8rem); font-weight: 800; letter-spacing: -.03em; line-height: .98; text-align: left; }
 .hero-title em { font-style: normal; font-weight: 700; color: var(--accent); }
-.hero-tagline { max-width: 620px; margin: 1.8rem auto 0; font-size: clamp(1.05rem, 1.7vw, 1.3rem); color: var(--ink-2); }
-.hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.4rem; }
-.hero-scroll { position: absolute; bottom: 1.6rem; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); display: flex; flex-direction: column; align-items: center; gap: .5rem; }
-.hero-scroll span { width: 1px; height: 36px; background: linear-gradient(var(--accent), transparent); animation: scrollLine 2s var(--ease-soft) infinite; }
-@keyframes scrollLine { 0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}50.1%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom} }
+.hero-tagline { max-width: 520px; margin: 1.6rem 0 0; font-size: clamp(1.02rem, 1.4vw, 1.18rem); color: var(--ink-2); }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.2rem; }
+.hero-divider { display: none; }
+.hero-media { position: relative; width: 100%; border-radius: var(--radius); overflow: hidden; aspect-ratio: 16/11; box-shadow: 0 24px 50px rgba(14,20,25,.12); }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; }
+.hero-media figcaption { position: absolute; left: 1rem; bottom: 1rem; font-family: var(--mono); font-size: .68rem; letter-spacing: .13em; text-transform: uppercase; color: #fff; background: rgba(14,20,25,.55); padding: .5rem .85rem; border-radius: 50px; backdrop-filter: blur(6px); }
+
+@media (min-width: 960px) {
+  .hero-grid { flex-direction: row; align-items: center; gap: 0; }
+  .hero-inner { flex: 0 1 560px; padding-right: clamp(2rem, 4.5vw, 4rem); }
+  .hero-divider { display: block; flex: 0 0 1px; align-self: stretch; background: linear-gradient(to bottom, transparent, var(--accent-deep) 18%, var(--accent-deep) 82%, transparent); opacity: .5; }
+  .hero-media { flex: 1 1 auto; max-width: 620px; margin-left: clamp(2rem, 4.5vw, 4rem); aspect-ratio: 4/5; }
+}
 
 /* 11. MARQUEE -------------------------------------------------- */
 .marquee { overflow: hidden; border-block: 1px solid var(--line); padding: 1.1rem 0; background: var(--bg-2); }
@@ -357,7 +366,7 @@ a.qs-row:hover { transform: translateX(5px); box-shadow: 0 12px 30px var(--accen
 @media (min-width: 1024px) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .side-dot, .hero-scroll span, .splash-bar i { animation: none; }
+  .side-dot, .splash-bar i { animation: none; }
 }
 
 /* 19. SERVICE PAGE (páginas individuales por servicio) --------- */
