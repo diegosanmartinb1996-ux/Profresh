@@ -45,7 +45,7 @@ img, svg, video { display: block; max-width: 100%; }
 img { height: auto; }
 button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
 a { color: inherit; text-decoration: none; }
-p { text-wrap: pretty; }
+p { text-wrap: pretty; text-align: justify; }
 h1, h2, h3, h4 { text-wrap: balance; line-height: 1.04; letter-spacing: -0.025em; font-family: var(--display); font-weight: 700; }
 ul { list-style: none; padding: 0; }
 ::selection { background: var(--accent); color: #fff; }
@@ -261,7 +261,7 @@ section { position: relative; }
 .solutions { padding: clamp(4rem, 9vw, 8rem) var(--gutter); max-width: 1280px; margin: 0 auto; }
 .solutions-head { max-width: 720px; margin-bottom: 2.6rem; }
 .solutions-title { font-size: clamp(2rem, 4.8vw, 3.6rem); margin-bottom: 1.1rem; }
-.solutions-title em { font-style: italic; color: var(--accent); }
+.solutions-title em { font-style: normal; color: var(--accent); }
 .solutions-grid { display: grid; gap: 1.4rem; grid-template-columns: 1fr; }
 @media (min-width: 860px) { .solutions-grid { grid-template-columns: 1fr 1fr; } }
 .sol-card { position: relative; overflow: hidden; border-radius: clamp(18px, 2.5vw, 28px); min-height: 460px; display: flex; align-items: flex-end; padding: clamp(1.6rem, 3vw, 2.6rem); transition: transform .5s var(--ease-out); transform-style: preserve-3d; }
