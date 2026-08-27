@@ -1,26 +1,36 @@
 /* ==========================================================================
-   Profresh · Conversions API de Meta (lado servidor)
+   Profresh · Worker principal del sitio
    --------------------------------------------------------------------------
-   Cloudflare Pages convierte este archivo en el endpoint POST /api/capi
-   automáticamente (carpeta functions/ = Cloudflare Pages Functions).
+   Este sitio se publica como un Worker de Cloudflare con archivos estáticos
+   (ver wrangler.toml), no como "Cloudflare Pages" clásico. Por eso el código
+   de servidor no puede vivir en una carpeta functions/ (esa convención es
+   solo de Pages) — tiene que ser este archivo, declarado como "main" en
+   wrangler.toml.
 
-   Recibe los eventos que manda lib/meta-pixel.js desde el navegador y los
-   reenvía a Meta desde el servidor, con el mismo event_id que usó el Pixel,
-   para que Meta los deduplique como un solo evento.
-
-   El Pixel ID va fijo aquí (no es secreto). El token de acceso a la
-   Conversions API SÍ es secreto: se lee de la variable de entorno
-   META_CAPI_TOKEN, configurada en Cloudflare Pages → Settings →
-   Environment variables (ver docs/analitica.md). Mientras esa variable no
-   exista, esta función no manda nada a Meta y no rompe el sitio.
+   Cualquier URL que coincide con un archivo real (index.html, styles.css,
+   lib/meta-pixel.js, etc.) la sirve Cloudflare directamente desde los
+   archivos estáticos, sin pasar por aquí. Este Worker solo se ejecuta para
+   URLs que NO son un archivo — hoy, solo /api/capi (Conversions API de
+   Meta). Para cualquier otra URL sin archivo, se delega en los archivos
+   estáticos igual (para que el 404 se vea igual que siempre).
    ========================================================================== */
 
 const PIXEL_ID = "1535795264880042";
 const EVENTOS_PERMITIDOS = ["PageView", "Contact", "Lead"];
 
-export async function onRequestPost(context) {
-  const { request, env } = context;
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
 
+    if (url.pathname === "/api/capi" && request.method === "POST") {
+      return manejarCAPI(request, env);
+    }
+
+    return env.ASSETS.fetch(request);
+  }
+};
+
+async function manejarCAPI(request, env) {
   if (!env.META_CAPI_TOKEN) {
     return new Response(null, { status: 204 });
   }
