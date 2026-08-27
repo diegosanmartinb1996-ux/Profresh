@@ -60,18 +60,41 @@ async function manejarCAPI(request, env) {
     }
   };
 
+  // test_event_code es opcional: solo lo manda quien está probando desde
+  // Meta Events Manager (pestaña "Probar eventos"), nunca el tráfico real.
+  // Cuando viene, se espera la respuesta real de Meta para poder diagnosticar
+  // el error en vez de responder siempre 204 a ciegas.
+  const payload = { data: [evento] };
+  if (typeof body.test_event_code === "string") {
+    payload.test_event_code = body.test_event_code;
+  }
+
   try {
-    await fetch(
+    const resp = await fetch(
       "https://graph.facebook.com/v21.0/" + PIXEL_ID + "/events?access_token=" + encodeURIComponent(env.META_CAPI_TOKEN),
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data: [evento] })
+        body: JSON.stringify(payload)
       }
     );
+
+    if (payload.test_event_code) {
+      const texto = await resp.text();
+      return new Response(texto, {
+        status: resp.status,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
   } catch (e) {
-    // Si Meta falla, no hay nada que el sitio pueda hacer al respecto;
-    // no debe afectar al usuario que hizo clic.
+    if (payload.test_event_code) {
+      return new Response(JSON.stringify({ error: String(e) }), {
+        status: 502,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    // Si Meta falla en trafico real, no hay nada que el sitio pueda hacer
+    // al respecto; no debe afectar al usuario que hizo clic.
   }
 
   return new Response(null, { status: 204 });
