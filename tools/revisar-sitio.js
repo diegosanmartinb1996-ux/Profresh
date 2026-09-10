@@ -25,6 +25,12 @@ const CARPETA = path.resolve(__dirname, '..');
 // excepcion, se saca de aca y el centinela vuelve a reclamar por ella.
 const NO_VAN_EN_EL_SITEMAP = [
   'propuesta-foco-airbnb-oficinas.html', // borrador interno, no es del sitio
+  // La politica de privacidad declara <meta name="robots" content="noindex">
+  // a proposito: no tiene nada que buscar en Google y no deberia competir con
+  // las paginas de servicio. Se llega a ella por el link del pie, no por el
+  // sitemap. Pedirle a Google que la indexe y a la vez decirle que no la
+  // indexe es una contradiccion que Search Console reporta como error.
+  'privacidad.html',
 ];
 
 const problemas = [];
@@ -172,6 +178,15 @@ async function revisarPaginaEnVivo(url) {
   const descripcion = texto(html, /<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["']/i);
   if (!descripcion) problema(`${nombre} no tiene meta description`);
   else if (descripcion.length > 160) aviso(`${nombre}: la meta description tiene ${descripcion.length} caracteres, Google corta cerca de 155`);
+
+  // Una pagina que esta en el sitemap y a la vez declara noindex es una
+  // contradiccion: se le pide a Google que la indexe y se le prohibe hacerlo.
+  // Search Console lo reporta como error ("Enviada mediante sitemap pero
+  // marcada como noindex"). Paso de verdad al agregar privacidad.html.
+  const robots = texto(html, /<meta[^>]+name=["']robots["'][^>]+content=["']([^"']*)["']/i);
+  if (robots && /noindex/i.test(robots)) {
+    problema(`${nombre} esta en el sitemap pero declara "noindex": o sale del sitemap, o se le quita el noindex`);
+  }
 
   const canonica = texto(html, /<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']*)["']/i);
   if (!canonica) aviso(`${nombre} no declara canonical`);

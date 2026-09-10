@@ -338,6 +338,9 @@ section { position: relative; }
 @media (min-width: 540px) { .field-split { grid-template-columns: 1fr 1fr; } }
 .quote-alt { display: inline-block; margin-top: .4rem; color: var(--accent-deep); font-weight: 600; font-size: .92rem; text-align: center; }
 .quote-alt:hover { text-decoration: underline; }
+.quote-nota { margin-top: .9rem; font-size: .78rem; line-height: 1.5; color: var(--ink-3); text-align: left; }
+.quote-nota a { color: var(--ink-3); text-decoration: underline; }
+.quote-nota a:hover { color: var(--accent-deep); }
 .quote-side { display: grid; gap: .8rem; align-content: start; }
 .qs-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.1rem 1.3rem; border-radius: 16px; background: var(--glass); border: 1px solid var(--glass-line); transition: transform .35s var(--ease-out), box-shadow .35s; }
 @supports (backdrop-filter: blur(10px)) { .qs-row { background: rgba(255,255,255,.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); } }
