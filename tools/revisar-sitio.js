@@ -139,6 +139,18 @@ function buscarPosiblesClaves(html, donde) {
 }
 
 async function revisarPaginaEnVivo(url) {
+  // Primero sin seguir la redireccion. Una URL del sitemap que contesta 3xx le
+  // esta dando a Google una direccion que no es la definitiva: Google la sigue,
+  // pero se diluye la senal y la canonical puede terminar apuntando a otra cosa.
+  // Este centinela seguia las redirecciones en silencio y no lo veia: las seis
+  // paginas contestaban 307 desde que el sitio pasó a ser un Worker.
+  const directo = await pedir(url);
+  revisado();
+  if (directo.ok && directo.estado >= 300 && directo.estado < 400) {
+    const destino = directo.destino ? new URL(directo.destino, url).toString() : '(sin destino)';
+    problema(`${url} contesta ${directo.estado} y redirige a ${destino}: el sitemap deberia listar la direccion final`);
+  }
+
   const r = await pedir(url, { redirect: 'follow' });
   revisado();
   if (!r.ok) { problema(`${url} no responde: ${r.error}`); return null; }
@@ -209,10 +221,18 @@ function paginasDelRepo() {
   return fs.readdirSync(CARPETA).filter(f => f.endsWith('.html'));
 }
 
+// Las URLs del sitio van sin ".html" (es lo que sirve Cloudflare), pero los
+// archivos del repo si la tienen. Esta funcion traduce de una a otro; sin ella
+// las comprobaciones contra el repo dejarian de encontrar nada, en silencio.
+function archivoDe(url) {
+  let nombre = url.replace(SITIO, '').replace(/^\//, '').replace(/[?#].*$/, '');
+  if (nombre === '') return 'index.html';
+  if (nombre.endsWith('.html')) return nombre;
+  return nombre + '.html';
+}
+
 function revisarRepoContraSitemap(urlsDelSitemap) {
-  const enElSitemap = new Set(
-    urlsDelSitemap.map(u => u.replace(SITIO, '').replace(/^\//, '') || 'index.html')
-  );
+  const enElSitemap = new Set(urlsDelSitemap.map(archivoDe));
 
   for (const pagina of paginasDelRepo()) {
     revisado();
@@ -256,8 +276,11 @@ function revisarHuerfanas() {
   const enlazadas = new Set(['index.html']);
   for (const pagina of paginas) {
     const html = fs.readFileSync(path.join(CARPETA, pagina), 'utf8');
-    for (const m of html.matchAll(/href=["']\.?\/?([\w-]+\.html)["']/g)) {
-      if (m[1] !== pagina) enlazadas.add(m[1]);
+    // Los enlaces del sitio van sin ".html" (href="/limpieza-airbnb"), pero
+    // tambien se aceptan los de la forma vieja por si queda alguno suelto.
+    for (const m of html.matchAll(/href=["']\.?\/?([\w-]+)(\.html)?(?:[?#][^"']*)?["']/g)) {
+      const archivo = m[1] + '.html';
+      if (archivo !== pagina) enlazadas.add(archivo);
     }
   }
   for (const pagina of paginas) {
@@ -297,8 +320,7 @@ async function main() {
 
   for (const url of urls) {
     const huella = await revisarPaginaEnVivo(url);
-    const archivo = url.replace(SITIO, '').replace(/^\//, '') || 'index.html';
-    revisarDeriva(archivo, huella);
+    revisarDeriva(archivoDe(url), huella);
   }
 
   revisarRepoContraSitemap(urls);

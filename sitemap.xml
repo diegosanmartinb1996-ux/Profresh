@@ -7,33 +7,38 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://profresh.cl/limpieza-airbnb.html</loc>
+    <loc>https://profresh.cl/limpieza-airbnb</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://profresh.cl/limpieza-oficinas.html</loc>
+    <loc>https://profresh.cl/limpieza-oficinas</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://profresh.cl/limpieza-profunda.html</loc>
+    <loc>https://profresh.cl/limpieza-profunda</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://profresh.cl/limpieza-express.html</loc>
+    <loc>https://profresh.cl/limpieza-express</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://profresh.cl/limpieza-post-obra.html</loc>
+    <loc>https://profresh.cl/limpieza-post-obra</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://profresh.cl/privacidad</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 </urlset>
