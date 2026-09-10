@@ -1,0 +1,34 @@
+# Archivos de esta carpeta que NO se publican en profresh.cl.
+#
+# Cloudflare publica como archivo publico TODO lo que este en esta carpeta
+# (wrangler.toml dice `directory = "./"`). Sin esta lista, `npx wrangler deploy`
+# sube tambien la carpeta .git entera, el codigo del servidor y los borradores
+# internos, y quedan alcanzables desde internet. Comprobado el 10 de septiembre
+# de 2026: https://profresh.cl/.git/config contestaba 200.
+#
+# Antes de agregar un archivo nuevo a esta carpeta, preguntarse si tiene que
+# poder abrirlo cualquiera. Si la respuesta es no, va aca.
+
+# El repositorio completo, con toda su historia
+.git
+.git/**
+
+# Restos de trabajo de wrangler
+.wrangler
+.wrangler/**
+
+# Configuracion y codigo del servidor
+wrangler.toml
+worker.js
+.assetsignore
+.htaccess
+
+# Herramientas internas (el centinela y el servidor de pruebas)
+tools
+tools/**
+
+# Documentacion interna
+README.md
+
+# Borrador interno, no es una pagina del sitio
+propuesta-foco-airbnb-oficinas.html
