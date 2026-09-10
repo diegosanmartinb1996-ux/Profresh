@@ -1,0 +1,31 @@
+# Archivos que NO van al repositorio.
+#
+# Este archivo no existia hasta el 10 de septiembre de 2026, y por eso un
+# `git add -A` se llevo `.wrangler/cache/wrangler-account.json` al repo publico.
+# Ahi solo iba el ID de cuenta de Cloudflare, que no es una credencial, pero la
+# proxima vez podria ser otra cosa.
+#
+# Ojo: esto es distinto de `.assetsignore`. Aquel dice que NO se publica en
+# profresh.cl; este dice que NO entra al repositorio. Un archivo con datos
+# sensibles tiene que estar en los dos.
+
+# Estado y cache de wrangler (incluye el ID de cuenta)
+.wrangler/
+
+# Dependencias, por si alguna vez se instala algo
+node_modules/
+
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+
+# Variables de entorno: los secretos NUNCA van al repo.
+# Van en Cloudflare (Settings -> Variables and secrets) o en `wrangler secret put`.
+.dev.vars
+.env
+.env.*
