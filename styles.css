@@ -45,7 +45,10 @@ img, svg, video { display: block; max-width: 100%; }
 img { height: auto; }
 button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
 a { color: inherit; text-decoration: none; }
-p { text-wrap: pretty; text-align: justify; }
+p { text-wrap: pretty; }
+/* Justificado solo desde tablet: en una columna angosta y sin guionado
+   automatico, justificar abre rios de espacio entre palabras. */
+@media (min-width: 768px) { p { text-align: justify; } }
 h1, h2, h3, h4 { text-wrap: balance; line-height: 1.04; letter-spacing: -0.025em; font-family: var(--display); font-weight: 700; }
 ul { list-style: none; padding: 0; }
 ::selection { background: var(--accent); color: #fff; }
