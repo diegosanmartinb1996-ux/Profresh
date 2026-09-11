@@ -150,18 +150,18 @@ section { position: relative; }
 
 /* 9. NÚMEROS --------------------------------------------------- */
 .nums { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.nums div { padding: 1.3rem 1rem 1.3rem 0; border-bottom: 1px solid var(--line); }
-.nums div:nth-child(odd) { border-right: 1px solid var(--line); padding-right: 1rem; }
-.nums div:nth-child(even) { padding-left: 1rem; }
-.nums div:nth-last-child(-n+2) { border-bottom: 0; }
+.nums > div { padding: 1.3rem 1.2rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.nums > div:nth-child(odd) { padding-left: 0; }
+.nums > div:nth-child(even) { border-right: 0; }
+.nums > div:nth-last-child(-n+2) { border-bottom: 0; }
 .nums b { font-family: var(--display); font-size: clamp(1.7rem, 3vw, 2.1rem); font-weight: 700; letter-spacing: -.03em; display: block; line-height: 1; font-variant-numeric: tabular-nums; }
 .nums span { font-size: .86rem; color: var(--ink-3); display: block; margin-top: .3rem; }
 .nums-nota { font-size: .78rem; color: var(--ink-3); margin-top: .7rem; }
 @media (min-width: 760px) {
   .nums { grid-template-columns: repeat(4, 1fr); }
-  .nums div, .nums div:nth-child(odd), .nums div:nth-child(even) { border-bottom: 0; border-right: 1px solid var(--line); padding: 1.4rem 1.2rem 1.4rem 0; }
-  .nums div + div { padding-left: 1.2rem; }
-  .nums div:last-child { border-right: 0; }
+  .nums > div, .nums > div:nth-child(odd), .nums > div:nth-child(even) { border-bottom: 0; border-right: 1px solid var(--line); padding: 1.4rem 1.4rem; }
+  .nums > div:first-child { padding-left: 0; }
+  .nums > div:last-child { border-right: 0; }
 }
 
 /* 10. PARA QUIÉN ----------------------------------------------- */
