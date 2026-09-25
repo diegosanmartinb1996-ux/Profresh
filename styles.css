@@ -295,3 +295,22 @@ section { position: relative; }
 .svc-closing-box { background: var(--ink); color: #fff; border-radius: 22px; padding: clamp(1.8rem, 4vw, 3rem); text-align: center; }
 .svc-closing h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); margin-bottom: .6rem; color: #fff; }
 .svc-closing p { color: #B7C6D0; max-width: 52ch; margin: 0 auto 1.4rem; }
+
+/* 18. RESPUESTA DIRECTA, ALCANCE Y COMUNAS --------------------- */
+.answer-box { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: clamp(1.1rem, 2.5vw, 1.5rem); border-radius: 0 var(--radius) var(--radius) 0; }
+.answer-box p { color: var(--ink); font-size: 1.02rem; line-height: 1.6; }
+.answer-box p + p { margin-top: .7rem; color: var(--ink-2); font-size: .94rem; }
+.answer-box + .nums { margin-top: 1.8rem; }
+
+.svc-includes-check.no { background: var(--bg-3); color: var(--ink-3); }
+
+.comuna-grid { display: grid; gap: .9rem; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .comuna-grid { grid-template-columns: 1fr 1fr; } }
+.comuna-card { display: block; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.2rem; background: var(--bg-2); text-decoration: none; }
+.comuna-card:hover { border-color: var(--accent); }
+.comuna-card b { font-family: var(--display); font-size: 1.08rem; color: var(--accent-deep); display: block; }
+.comuna-card b::after { content: " \2192"; }
+.comuna-card span { display: block; margin-top: .3rem; color: var(--ink-3); font-size: .89rem; line-height: 1.5; }
+
+.path-links { margin-top: .9rem; font-size: .85rem; color: var(--ink-3); line-height: 1.7; }
+.path-links a { color: var(--accent-deep); font-weight: 500; }
