@@ -18,12 +18,31 @@
 const PIXEL_ID = "1535795264880042";
 const EVENTOS_PERMITIDOS = ["PageView", "Contact", "Lead"];
 
+/* Páginas que existieron y ya no, con su reemplazo. Van con 301 (permanente)
+   para que Google traspase a la página nueva lo que la vieja había ganado, y
+   para que un link ya compartido no termine en un 404.
+
+   /limpieza-airbnb-las-condes se publicó el 25 de septiembre de 2026 y se
+   retiró el mismo día: se midió que profresh.cl ya era el resultado número 1
+   en «limpieza airbnb las condes» con la portada, así que una página aparte
+   solo arriesgaba que dos páginas propias compitieran por la misma búsqueda.
+   Su contenido vive ahora dentro de /limpieza-airbnb. */
+const REDIRECCIONES = {
+  "/limpieza-airbnb-las-condes": "/limpieza-airbnb",
+  "/limpieza-airbnb-las-condes.html": "/limpieza-airbnb"
+};
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
     if (url.pathname === "/api/capi" && request.method === "POST") {
       return manejarCAPI(request, env);
+    }
+
+    const destino = REDIRECCIONES[url.pathname.replace(/\/+$/, "") || "/"];
+    if (destino) {
+      return Response.redirect(new URL(destino + url.search, url.origin).toString(), 301);
     }
 
     return env.ASSETS.fetch(request);
