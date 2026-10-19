@@ -1,0 +1,15 @@
+# Cabeceras de seguridad de profresh.cl (19-oct-2026).
+# Cloudflare las aplica a todos los archivos estáticos; este archivo no se
+# publica como página. Si se agrega una herramienta externa nueva (un mapa,
+# un chat, otro script), hay que sumar su dominio a Content-Security-Policy
+# o el navegador la bloquea. El hash sha256 de script-src corresponde a la
+# única línea de JavaScript escrita dentro de las páginas:
+#   document.documentElement.className += " js";
+# Si esa línea cambia, el hash también.
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-riitXBKGtl5y5ccA7GF6ccqJuwEVP5tm8j0ff/fbw9U=' https://*.googletagmanager.com https://connect.facebook.net; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://www.facebook.com https://*.google-analytics.com https://*.googletagmanager.com https://*.g.doubleclick.net https://*.google.com https://*.google.cl; connect-src 'self' https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.googletagmanager.com https://*.g.doubleclick.net https://*.google.com https://*.google.cl https://www.facebook.com https://connect.facebook.net; frame-src https://www.facebook.com; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests

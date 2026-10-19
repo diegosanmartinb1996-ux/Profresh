@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,600;9..40,700&family=Inter:wght@400;500;600&display=swap">
 
-<link rel="stylesheet" href="styles.css?v=20260925b" />
+<link rel="stylesheet" href="styles.css?v=20261019a" />
 </head>
 <body>
 
@@ -85,8 +85,15 @@
 <section class="svc-section">
   <div class="svc-section-head">
     <h2 class="svc-section-title reveal" data-reveal>Qué datos recopilamos</h2>
-    <p class="reveal" data-reveal>Cuando nos escribes por WhatsApp, recibimos tu nombre, teléfono y el detalle que nos cuentes sobre el servicio que necesitas. Importante: <strong>este sitio no tiene formularios ni guarda nada</strong> — los botones abren WhatsApp con un mensaje que tú envías, así que esos datos llegan a nuestro WhatsApp y no a una base de datos del sitio.</p>
-    <p class="reveal" data-reveal>Además, el sitio usa <strong>Google Analytics</strong> para entender cuánta gente lo visita y qué páginas revisa, y el <strong>Pixel de Meta</strong> (Facebook e Instagram) para saber si alguien llegó desde un aviso nuestro. Los dos registran cosas como que se abrió una página o que se hizo clic en un botón de WhatsApp — <strong>no registran tu nombre, tu teléfono ni lo que escribiste en el formulario</strong>. En el caso de Meta, desde nuestro servidor se envía también tu dirección IP y el navegador que usas, que es lo que le permite reconocer la visita.</p>
+    <p class="reveal" data-reveal>Cuando nos escribes por WhatsApp, recibimos tu nombre, teléfono y el detalle que nos cuentes sobre el servicio que necesitas. Importante: <strong>este sitio no tiene formularios ni guarda nada</strong>: los botones abren WhatsApp con un mensaje que tú envías, así que esos datos llegan a nuestro WhatsApp y no a una base de datos del sitio.</p>
+    <p class="reveal" data-reveal>Además, <strong>si aceptas las cookies</strong>, el sitio usa <strong>Google Analytics</strong> para entender cuánta gente lo visita y qué páginas revisa, y el <strong>Pixel de Meta</strong> (Facebook e Instagram) para saber si alguien llegó desde un aviso nuestro. Los dos registran cosas como que se abrió una página o que se hizo clic en un botón de WhatsApp. <strong>No registran tu nombre, tu teléfono ni lo que nos escribes</strong>. En el caso de Meta, desde nuestro servidor se envía también tu dirección IP y el navegador que usas, que es lo que le permite reconocer la visita.</p>
+  </div>
+</section>
+
+<section class="svc-section" id="cookies">
+  <div class="svc-section-head">
+    <h2 class="svc-section-title reveal" data-reveal>Cookies</h2>
+    <p class="reveal" data-reveal>La primera vez que entras te preguntamos si aceptas las cookies de medición. Si las rechazas, Google Analytics y el Pixel de Meta no se cargan y el sitio funciona igual. Tu elección queda guardada en tu navegador por 12 meses, y puedes cambiarla cuando quieras: <a href="#cookies" data-cookies-config><strong>configurar cookies</strong></a>.</p>
   </div>
 </section>
 
@@ -100,7 +107,7 @@
 <section class="svc-section">
   <div class="svc-section-head">
     <h2 class="svc-section-title reveal" data-reveal>Con quién los compartimos</h2>
-    <p class="reveal" data-reveal>No vendemos tus datos ni se los pasamos a nadie para que te contacte. Las dos únicas excepciones son las herramientas de medición: <strong>Google Analytics</strong> y el <strong>Pixel de Meta</strong> (Facebook e Instagram) procesan datos de navegación según sus propias políticas de privacidad, como ocurre en la gran mayoría de los sitios web. Si prefieres que no lo hagan, cualquier bloqueador de anuncios o el modo de navegación privada de tu navegador los detiene, y el sitio sigue funcionando igual.</p>
+    <p class="reveal" data-reveal>No vendemos tus datos ni se los pasamos a nadie para que te contacte. Las dos únicas excepciones son las herramientas de medición: <strong>Google Analytics</strong> y el <strong>Pixel de Meta</strong> (Facebook e Instagram) procesan datos de navegación según sus propias políticas de privacidad, como ocurre en la gran mayoría de los sitios web. Solo reciben datos si aceptaste las cookies.</p>
   </div>
 </section>
 
@@ -114,7 +121,7 @@
 <section class="svc-section">
   <div class="svc-section-head">
     <h2 class="svc-section-title reveal" data-reveal>¿Dudas?</h2>
-    <p class="reveal" data-reveal>Escríbenos por WhatsApp y te respondemos directamente — no hay formularios adicionales ni trámites para esto.</p>
+    <p class="reveal" data-reveal>Escríbenos por WhatsApp y te respondemos directamente. No hay formularios adicionales ni trámites para esto.</p>
   </div>
 </section>
 
@@ -164,12 +171,13 @@
   </div>
   <div class="footer-legal">
     <span>© 2026 Profresh · Santiago de Chile</span>
-    <span><a href="/privacidad">Política de privacidad</a> · <a href="#top">↑ Volver arriba</a></span>
+    <span><a href="/privacidad">Política de privacidad</a> · <a href="/privacidad#cookies" data-cookies-config>Configurar cookies</a> · <a href="#top">↑ Volver arriba</a></span>
   </div>
 </footer>
 
 <script defer src="main.js?v=20260910c"></script>
-<script defer src="lib/analytics.js?v=20260819b"></script>
-<script defer src="lib/meta-pixel.js?v=20260827a"></script>
+<script defer src="lib/consentimiento.js?v=20261019a"></script>
+<script defer src="lib/analytics.js?v=20261019a"></script>
+<script defer src="lib/meta-pixel.js?v=20261019a"></script>
 </body>
 </html>

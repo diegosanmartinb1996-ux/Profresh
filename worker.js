@@ -16,7 +16,13 @@
    ========================================================================== */
 
 const PIXEL_ID = "1535795264880042";
-const EVENTOS_PERMITIDOS = ["PageView", "Contact", "Lead"];
+const EVENTOS_PERMITIDOS = ["PageView", "Contact"];
+
+/* /api/capi solo acepta eventos mandados desde las páginas del sitio. Sin
+   esto, cualquiera podía mandar eventos falsos a Meta y ensuciar la medición
+   de los avisos. El navegador siempre agrega Origin a un POST, así que un
+   visitante real nunca queda fuera. */
+const ORIGENES_PERMITIDOS = ["https://profresh.cl", "https://www.profresh.cl"];
 
 /* Páginas que existieron y ya no, con su reemplazo. Van con 301 (permanente)
    para que Google traspase a la página nueva lo que la vieja había ganado, y
@@ -50,6 +56,10 @@ export default {
 };
 
 async function manejarCAPI(request, env) {
+  if (ORIGENES_PERMITIDOS.indexOf(request.headers.get("Origin")) === -1) {
+    return new Response(null, { status: 403 });
+  }
+
   if (!env.META_CAPI_TOKEN) {
     return new Response(null, { status: 204 });
   }
